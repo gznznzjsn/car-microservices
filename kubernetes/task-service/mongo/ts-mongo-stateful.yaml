@@ -4,7 +4,7 @@ metadata:
   name: ts-mongo-stateful
 spec:
   serviceName: ts-mongo
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: ts-mongo
