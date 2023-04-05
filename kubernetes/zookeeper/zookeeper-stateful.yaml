@@ -35,16 +35,16 @@ spec:
                 configMapKeyRef:
                   name: zookeeper-configmap
                   key: ZOOKEEPER_SYNC_LIMIT
-#      volumes:
-#        - name: zookeeper-disk
-#          hostPath:
-#            path: /data
-#  volumeClaimTemplates:
-#    - metadata:
-#        name: zookeeper-disk
-#      spec:
-#        accessModes:
-#          - ReadWriteOnce
-#        resources:
-#          requests:
-#            storage: 1Gi
+      volumes:
+        - name: zookeeper-disk
+          hostPath:
+            path: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: zookeeper-disk
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
