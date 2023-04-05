@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-service-configmap
+data:
+  SPRING_R2DBC_URL: 'r2dbc:postgresql://os-postgres-service:5432/postgres'
+  SPRING_JDBC_URL: 'jdbc:postgresql://os-postgres-service:5432/postgres'
+  SPRING_KAFKA_BOOTSTRAP-SERVERS: 'kafka-service:9092'
+  SETTINGS_TASK-SERVICE_HOST: 'task-service'
+  SETTINGS_TASK-SERVICE_PORT: '8080'

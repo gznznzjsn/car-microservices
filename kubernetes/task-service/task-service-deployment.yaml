@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: task-service
+  template:
+    metadata:
+      labels:
+        app: task-service
+    spec:
+      containers:
+        - name: task-service
+          image: gzn2zjsn/task-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_LIQUIBASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: task-service-configmap
+                  key: SPRING_LIQUIBASE_URL
+            - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: task-service-configmap
+                  key: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
+            - name: SPRING_DATA_MONGODB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: task-service-configmap
+                  key: SPRING_DATA_MONGODB_PORT
+            - name: SPRING_DATA_MONGODB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: task-service-configmap
+                  key: SPRING_DATA_MONGODB_DATABASE
+            - name: SPRING_DATA_MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: task-service-configmap
+                  key: SPRING_DATA_MONGODB_HOST
+            - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: task-service-configmap
+                  key: SPRING_KAFKA_BOOTSTRAP-SERVERS
+            - name: SPRING_DATA_MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: task-service-secret
+                  key: SPRING_DATA_MONGODB_USERNAME
+            - name: SPRING_DATA_MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: task-service-secret
+                  key: SPRING_DATA_MONGODB_PASSWORD
+            - name: SPRING_DATA_REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: task-service-configmap
+                  key: SPRING_DATA_REDIS_PORT
+            - name: SPRING_DATA_REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: task-service-configmap
+                  key: SPRING_DATA_REDIS_HOST

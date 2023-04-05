@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: gzn2zjsn/order-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_JDBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: order-service-configmap
+                  key: SPRING_JDBC_URL
+            - name: SPRING_R2DBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: order-service-configmap
+                  key: SPRING_R2DBC_URL
+            - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: order-service-configmap
+                  key: SPRING_KAFKA_BOOTSTRAP-SERVERS
+            - name: SETTINGS_TASK-SERVICE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: order-service-configmap
+                  key: SETTINGS_TASK-SERVICE_HOST
+            - name: SETTINGS_TASK-SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: order-service-configmap
+                  key: SETTINGS_TASK-SERVICE_PORT
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: order-service-secret
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: order-service-secret
+                  key: SPRING_DATASOURCE_PASSWORD
+

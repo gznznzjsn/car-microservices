@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ts-mongo-stateful
+spec:
+  serviceName: ts-mongo
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ts-mongo
+  template:
+    metadata:
+      labels:
+        app: ts-mongo
+    spec:
+      containers:
+        - name: ts-mongo
+          image: mongo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ts-mongo-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ts-mongo-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+      volumes:
+        - name: task-service-db-disk
+          hostPath:
+            path: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: task-service-db-disk
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
