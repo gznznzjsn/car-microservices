@@ -1,6 +1,6 @@
-kubectl apply -f zookeeper/zookeeper-configmap.yaml
-kubectl apply -f zookeeper/zookeeper-stateful.yaml
-kubectl apply -f zookeeper/zookeeper-service.yaml
+kubectl apply -f kafka/zookeeper/zookeeper-configmap.yaml
+kubectl apply -f kafka/zookeeper/zookeeper-stateful.yaml
+kubectl apply -f kafka/zookeeper/zookeeper-service.yaml
 
 kubectl apply -f kafka/kafka-configmap.yaml
 kubectl apply -f kafka/kafka-deployment.yaml
@@ -26,3 +26,7 @@ kubectl apply -f task-service/task-service-configmap.yaml
 kubectl apply -f task-service/task-service-secret.yaml
 kubectl apply -f task-service/task-service-deployment.yaml
 kubectl apply -f task-service/task-service-service.yaml
+
+kubectl apply -f istio-ingress.yaml
+
+minikube tunnel
