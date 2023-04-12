@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-service
+  template:
+    metadata:
+      labels:
+        app: inventory-service
+    spec:
+      containers:
+        - name: inventory-service
+          image: gzn2zjsn/inventory-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_JDBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: SPRING_JDBC_URL
+            - name: SPRING_R2DBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: SPRING_R2DBC_URL
+            - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
+            - name: SPRING_DATA_MONGODB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: SPRING_DATA_MONGODB_PORT
+            - name: SPRING_DATA_MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: SPRING_DATA_MONGODB_HOST
+            - name: AXON_AXONSERVER_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: AXON_AXONSERVER_SERVERS
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: inventory-service-secret
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: inventory-service-secret
+                  key: SPRING_DATASOURCE_PASSWORD
+            - name: SPRING_DATA_MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: inventory-service-secret
+                  key: SPRING_DATA_MONGODB_USERNAME
+            - name: SPRING_DATA_MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: inventory-service-secret
+                  key: SPRING_DATA_MONGODB_PASSWORD
+
+
