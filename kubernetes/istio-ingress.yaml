@@ -22,3 +22,17 @@ spec:
                 name: order-service
                 port:
                   number: 8080
+          - path: /inventory-api
+            pathType: Prefix
+            backend:
+              service:
+                name: inventory-service
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: axonserver-gui
+                port:
+                  number: 8024
