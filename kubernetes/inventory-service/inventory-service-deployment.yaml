@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: inventory-service
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: inventory-service

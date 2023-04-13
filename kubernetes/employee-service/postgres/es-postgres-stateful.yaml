@@ -4,7 +4,7 @@ metadata:
   name: es-postgres-stateful
 spec:
   serviceName: es-postgres
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: es-postgres
