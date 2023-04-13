@@ -29,6 +29,13 @@ spec:
                 name: inventory-service
                 port:
                   number: 8080
+          - path: /employee-api
+            pathType: Prefix
+            backend:
+              service:
+                name: employee-service
+                port:
+                  number: 8080
           - path: /
             pathType: Prefix
             backend:
