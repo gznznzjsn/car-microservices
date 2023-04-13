@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: employee-service-configmap
+data:
+  SPRING_R2DBC_URL: 'r2dbc:postgresql://es-postgres-service:5432/postgres'
+  SPRING_JDBC_URL: 'jdbc:postgresql://es-postgres-service:5432/postgres'
+  SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE: 'admin'
+  SPRING_DATA_MONGODB_PORT: '27017'
+  SPRING_DATA_MONGODB_HOST: 'es-mongo-service'
+  AXON_AXONSERVER_SERVERS: 'axonserver-service:8124'

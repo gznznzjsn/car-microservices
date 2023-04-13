@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: es-mongo-stateful
+spec:
+  serviceName: es-mongo
+  replicas: 1
+  selector:
+    matchLabels:
+      app: es-mongo
+  template:
+    metadata:
+      labels:
+        app: es-mongo
+    spec:
+      containers:
+        - name: es-mongo
+          image: mongo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: es-mongo-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: es-mongo-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+      volumes:
+        - name: employee-service-eventstore-disk
+          hostPath:
+            path: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: employee-service-eventstore-disk
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
