@@ -52,22 +52,22 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: inventory-service-secret
-                  key: SPRING_DATASOURCE_USERNAME
+                  name: is-postgres-secret
+                  key: POSTGRES_USER
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: inventory-service-secret
-                  key: SPRING_DATASOURCE_PASSWORD
+                  name: is-postgres-secret
+                  key: POSTGRES_PASSWORD
             - name: SPRING_DATA_MONGODB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: inventory-service-secret
-                  key: SPRING_DATA_MONGODB_USERNAME
+                  name: is-mongo-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
             - name: SPRING_DATA_MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: inventory-service-secret
-                  key: SPRING_DATA_MONGODB_PASSWORD
+                  name: is-mongo-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
 
 

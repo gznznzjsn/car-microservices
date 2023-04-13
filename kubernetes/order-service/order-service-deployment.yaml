@@ -47,11 +47,11 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: order-service-secret
-                  key: SPRING_DATASOURCE_USERNAME
+                  name: os-postgres-secret
+                  key: POSTGRES_USER
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: order-service-secret
-                  key: SPRING_DATASOURCE_PASSWORD
+                  name: os-postgres-secret
+                  key: POSTGRES_PASSWORD
 

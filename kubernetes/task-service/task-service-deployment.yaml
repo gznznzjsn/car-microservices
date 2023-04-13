@@ -52,13 +52,13 @@ spec:
             - name: SPRING_DATA_MONGODB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: task-service-secret
-                  key: SPRING_DATA_MONGODB_USERNAME
+                  name: ts-mongo-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
             - name: SPRING_DATA_MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: task-service-secret
-                  key: SPRING_DATA_MONGODB_PASSWORD
+                  name: ts-mongo-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
             - name: SPRING_DATA_REDIS_PORT
               valueFrom:
                 configMapKeyRef:

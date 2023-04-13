@@ -64,5 +64,3 @@ kubectl apply -f employee-service/employee-service-service.yaml
 
 # INGRESS
 kubectl apply -f istio-ingress.yaml
-
-minikube tunnel
