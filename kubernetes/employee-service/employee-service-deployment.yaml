@@ -19,52 +19,52 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: SPRING_JDBC_URL
+            - name: APP_JDBC_URL
               valueFrom:
                 configMapKeyRef:
                   name: employee-service-configmap
-                  key: SPRING_JDBC_URL
-            - name: SPRING_R2DBC_URL
+                  key: APP_JDBC_URL
+            - name: APP_R2DBC_URL
               valueFrom:
                 configMapKeyRef:
                   name: employee-service-configmap
-                  key: SPRING_R2DBC_URL
-            - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
+                  key: APP_R2DBC_URL
+            - name: APP_DATA_MONGODB_AUTHENTICATION-DATABASE
               valueFrom:
                 configMapKeyRef:
                   name: employee-service-configmap
-                  key: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
-            - name: SPRING_DATA_MONGODB_PORT
+                  key: APP_DATA_MONGODB_AUTHENTICATION-DATABASE
+            - name: APP_DATA_MONGODB_PORT
               valueFrom:
                 configMapKeyRef:
                   name: employee-service-configmap
-                  key: SPRING_DATA_MONGODB_PORT
-            - name: SPRING_DATA_MONGODB_HOST
+                  key: APP_DATA_MONGODB_PORT
+            - name: APP_DATA_MONGODB_HOST
               valueFrom:
                 configMapKeyRef:
                   name: employee-service-configmap
-                  key: SPRING_DATA_MONGODB_HOST
+                  key: APP_DATA_MONGODB_HOST
             - name: AXON_AXONSERVER_SERVERS
               valueFrom:
                 configMapKeyRef:
                   name: employee-service-configmap
                   key: AXON_AXONSERVER_SERVERS
-            - name: SPRING_DATASOURCE_USERNAME
+            - name: APP_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: es-postgres-secret
                   key: POSTGRES_USER
-            - name: SPRING_DATASOURCE_PASSWORD
+            - name: APP_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: es-postgres-secret
                   key: POSTGRES_PASSWORD
-            - name: SPRING_DATA_MONGODB_USERNAME
+            - name: APP_DATA_MONGODB_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: es-mongo-secret
                   key: MONGO_INITDB_ROOT_USERNAME
-            - name: SPRING_DATA_MONGODB_PASSWORD
+            - name: APP_DATA_MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: es-mongo-secret

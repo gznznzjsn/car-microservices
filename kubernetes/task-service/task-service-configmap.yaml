@@ -3,11 +3,11 @@ kind: ConfigMap
 metadata:
   name: task-service-configmap
 data:
-  SPRING_LIQUIBASE_URL: 'mongodb://ts-mongo-service:27017/tasks'
-  SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE: 'admin'
-  SPRING_DATA_MONGODB_PORT: '27017'
-  SPRING_DATA_MONGODB_DATABASE: 'tasks'
-  SPRING_DATA_MONGODB_HOST: 'ts-mongo-service'
-  SPRING_DATA_REDIS_PORT: '6379'
-  SPRING_DATA_REDIS_HOST: 'ts-redis-service'
-  SPRING_KAFKA_BOOTSTRAP-SERVERS: 'kafka-service:9092'
+  APP_LIQUIBASE_URL: 'mongodb://ts-mongo-service:27017/tasks'
+  APP_DATA_MONGODB_AUTHENTICATION-DATABASE: 'admin'
+  APP_DATA_MONGODB_PORT: '27017'
+  APP_DATA_MONGODB_DATABASE: 'tasks'
+  APP_DATA_MONGODB_HOST: 'ts-mongo-service'
+  APP_DATA_REDIS_PORT: '6379'
+  APP_DATA_REDIS_HOST: 'ts-redis-service'
+  APP_KAFKA_BOOTSTRAP-SERVERS: 'kafka-service:9092'

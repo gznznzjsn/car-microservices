@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: inventory-service-configmap
 data:
-  SPRING_R2DBC_URL: 'r2dbc:postgresql://is-postgres-service:5432/postgres'
-  SPRING_JDBC_URL: 'jdbc:postgresql://is-postgres-service:5432/postgres'
-  SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE: 'admin'
-  SPRING_DATA_MONGODB_PORT: '27017'
-  SPRING_DATA_MONGODB_HOST: 'is-mongo-service'
+  APP_R2DBC_URL: 'r2dbc:postgresql://is-postgres-service:5432/postgres'
+  APP_JDBC_URL: 'jdbc:postgresql://is-postgres-service:5432/postgres'
+  APP_DATA_MONGODB_AUTHENTICATION-DATABASE: 'admin'
+  APP_DATA_MONGODB_PORT: '27017'
+  APP_DATA_MONGODB_HOST: 'is-mongo-service'
   AXON_AXONSERVER_SERVERS: 'axonserver-service:8124'
