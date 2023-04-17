@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: inventory-service
+  template:
+    metadata:
+      labels:
+        app: inventory-service
+    spec:
+      containers:
+        - name: inventory-service
+          image: gzn2zjsn/inventory-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_JDBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: APP_JDBC_URL
+            - name: APP_R2DBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: APP_R2DBC_URL
+            - name: APP_DATA_MONGODB_AUTHENTICATION-DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: APP_DATA_MONGODB_AUTHENTICATION-DATABASE
+            - name: APP_DATA_MONGODB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: APP_DATA_MONGODB_PORT
+            - name: APP_DATA_MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: APP_DATA_MONGODB_HOST
+            - name: AXON_AXONSERVER_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: inventory-service-configmap
+                  key: AXON_AXONSERVER_SERVERS
+            - name: APP_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: is-postgres-secret
+                  key: POSTGRES_USER
+            - name: APP_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: is-postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: APP_DATA_MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: is-mongo-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: APP_DATA_MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: is-mongo-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+
+

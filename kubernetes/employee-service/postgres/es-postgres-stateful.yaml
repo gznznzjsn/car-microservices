@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: es-postgres-stateful
+spec:
+  serviceName: es-postgres
+  replicas: 3
+  selector:
+    matchLabels:
+      app: es-postgres
+  template:
+    metadata:
+      labels:
+        app: es-postgres
+    spec:
+      containers:
+        - name: es-postgres
+          image: postgres
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: es-postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: es-postgres-secret
+                  key: POSTGRES_PASSWORD
+      volumes:
+        - name: employee-service-db-disk
+          hostPath:
+            path: mnt/data
+  volumeClaimTemplates:
+    - metadata:
+        name: employee-service-db-disk
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

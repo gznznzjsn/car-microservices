@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employee-service
+  template:
+    metadata:
+      labels:
+        app: employee-service
+    spec:
+      containers:
+        - name: employee-service
+          image: gzn2zjsn/employee-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_JDBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: employee-service-configmap
+                  key: APP_JDBC_URL
+            - name: APP_R2DBC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: employee-service-configmap
+                  key: APP_R2DBC_URL
+            - name: APP_DATA_MONGODB_AUTHENTICATION-DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: employee-service-configmap
+                  key: APP_DATA_MONGODB_AUTHENTICATION-DATABASE
+            - name: APP_DATA_MONGODB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: employee-service-configmap
+                  key: APP_DATA_MONGODB_PORT
+            - name: APP_DATA_MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: employee-service-configmap
+                  key: APP_DATA_MONGODB_HOST
+            - name: AXON_AXONSERVER_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: employee-service-configmap
+                  key: AXON_AXONSERVER_SERVERS
+            - name: APP_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: es-postgres-secret
+                  key: POSTGRES_USER
+            - name: APP_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: es-postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: APP_DATA_MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: es-mongo-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: APP_DATA_MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: es-mongo-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+
+
