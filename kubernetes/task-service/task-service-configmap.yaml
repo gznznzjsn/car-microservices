@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  namespace: default
   name: task-service-configmap
 data:
   APP_LIQUIBASE_URL: 'mongodb://ts-mongo-service:27017/tasks'

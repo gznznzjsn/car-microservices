@@ -1,10 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  namespace: default
   name: is-postgres-stateful
 spec:
   serviceName: is-postgres
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: is-postgres
