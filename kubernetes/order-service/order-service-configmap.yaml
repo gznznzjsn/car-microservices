@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  namespace: default
   name: order-service-configmap
 data:
   APP_R2DBC_URL: 'r2dbc:postgresql://os-postgres-service:5432/postgres'

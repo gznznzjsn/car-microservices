@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  namespace: default
   name: kafka-configmap
 data:
   KAFKA_BROKER_ID: '2'

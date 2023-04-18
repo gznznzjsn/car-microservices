@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: istio
+  namespace: default
   name: istio-ingress
 spec:
   rules:

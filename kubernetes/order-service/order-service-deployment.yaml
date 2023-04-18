@@ -1,9 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: default
   name: order-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: order-service
@@ -12,6 +13,7 @@ spec:
       labels:
         app: order-service
     spec:
+      serviceAccountName: order-service-service-account
       containers:
         - name: order-service
           image: gzn2zjsn/order-service
