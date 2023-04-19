@@ -1,0 +1,21 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: os-actions-runner
+  namespace: actions-runner-system
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: os-actions-runner-sa
+      automountServiceAccountToken: true
+      repository: gznznzjsn/order-service
+      labels:
+        - k8s-api
+      workVolumeClaimTemplate:
+        storageClassName: "standard"
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
