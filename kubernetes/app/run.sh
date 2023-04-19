@@ -60,7 +60,6 @@ kubectl apply -f employee-service/postgres/es-postgres-stateful.yaml
 kubectl apply -f employee-service/postgres/es-postgres-service.yaml
 
 kubectl apply -f employee-service/employee-service-configmap.yaml
-kubectl apply -f employee-service/employee-service-secret.yaml
 kubectl apply -f employee-service/employee-service-deployment.yaml
 kubectl apply -f employee-service/employee-service-service.yaml
 
