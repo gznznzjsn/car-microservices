@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: os-actions-runner-crb
+  namespace: actions-runner-system
+subjects:
+  - kind: ServiceAccount
+    name: os-actions-runner-sa
+    namespace: actions-runner-system
+    apiGroup: ""
+roleRef:
+  kind: ClusterRole
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
