@@ -1,13 +1,9 @@
 kubectl apply -f istio/istio-peer-authentication.yaml
 
 # KAFKA
-kubectl apply -f kafka/zookeeper/zookeeper-configmap.yaml
-kubectl apply -f kafka/zookeeper/zookeeper-stateful.yaml
-kubectl apply -f kafka/zookeeper/zookeeper-service.yaml
-
-kubectl apply -f kafka/kafka-configmap.yaml
-kubectl apply -f kafka/kafka-deployment.yaml
-kubectl apply -f kafka/kafka-service.yaml
+kubectl apply -f kafka/strimzi/kafka-service-account.yaml
+kubectl apply -f kafka/strimzi/kafka-crb.yaml
+kubectl apply -f kafka/strimzi/kafka-persistent.yaml
 
 # ORDER-SERVICE
 kubectl apply -f order-service/postgres/os-postgres-secret.yaml

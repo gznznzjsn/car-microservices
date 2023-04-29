@@ -11,4 +11,4 @@ data:
   APP_DATA_MONGODB_HOST: 'ts-mongo-service'
   APP_DATA_REDIS_PORT: '6379'
   APP_DATA_REDIS_HOST: 'ts-redis-service'
-  APP_KAFKA_BOOTSTRAP-SERVERS: 'kafka-service:9092'
+  APP_KAFKA_BOOTSTRAP-SERVERS: 'kafka-cluster-kafka-bootstrap.kafka:9092'
