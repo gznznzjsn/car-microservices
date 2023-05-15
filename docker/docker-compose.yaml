@@ -58,7 +58,7 @@ services:
       - "-c"
       - "wal_level=logical"
 
-  connector:
+  debezium:
     build: ../debezium
     ports:
       - "8083:8083"
