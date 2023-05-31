@@ -79,17 +79,42 @@ services:
 
 
   elasticsearch:
-    image: elasticsearch:8.2.2
+    image: elasticsearch:8.7.1
+    container_name: elasticsearch
     ports:
       - "9200:9200"
     volumes:
       - es-data:/usr/share/elasticsearch/data
     environment:
-      - http.host=0.0.0.0
-      - transport.host=127.0.0.1
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
       - xpack.security.enabled=false
+
+  kibana:
+    image: kibana:8.7.1
+    container_name: kibana
+    restart: always
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: logstash:8.7.1
+    container_name: logstash
+    restart: always
+    volumes:
+      - ../logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ../logs/:/usr/share/logstash/logs
+      - logstash-data:/usr/share/logstash/pipeline/
+    depends_on:
+      - elasticsearch
+    ports:
+      - "9600:9600"
+    environment:
+      - LS_JAVA_OPTS=-Xmx256m -Xms256m
 
 volumes:
   postgres-data:
@@ -97,5 +122,7 @@ volumes:
   es-data:
     driver: local
   mongodb-data:
+    driver: local
+  logstash-data:
     driver: local
 
