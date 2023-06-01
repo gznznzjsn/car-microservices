@@ -150,6 +150,19 @@ services:
     environment:
       - LS_JAVA_OPTS=-Xmx256m -Xms256m
 
+  grafana:
+    image: grafana/grafana-oss:9.5.2
+    pull_policy: always
+    ports:
+      - "3000:3000"
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SERVER_DOMAIN=localhost
+
 volumes:
   postgres-data:
     driver: local
@@ -158,5 +171,7 @@ volumes:
   mongodb-data:
     driver: local
   logstash-data:
+    driver: local
+  grafana-data:
     driver: local
 
