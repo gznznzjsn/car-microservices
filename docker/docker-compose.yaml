@@ -12,6 +12,41 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=username
       - MONGO_INITDB_ROOT_PASSWORD=password
 
+  axonserver:
+    image: axoniq/axonserver
+    container_name: axonserver
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+
+  inventory-service:
+    container_name: inventory-service
+    env_file:
+      - ../../inventory-service/.env
+    build: ../../inventory-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - axonserver
+      - mongodb
+      - elasticsearch
+      - kafka
+      - postgres
+      - prometheus
+    environment:
+      - SPRINGPROFILES=prod,actuator
+
+  prometheus:
+    image: prom/prometheus:v2.9.2
+    ports:
+      - "9090:9090"
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ../prometheus/:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+
   redis:
     container_name: redis
     image: redis
@@ -76,7 +111,6 @@ services:
       - CONFIG_STORAGE_TOPIC=my_connect_configs
       - OFFSET_STORAGE_TOPIC=my_connect_offsets
       - STATUS_STORAGE_TOPIC=my_connect_statuses
-
 
   elasticsearch:
     image: elasticsearch:8.7.1
